@@ -38,7 +38,8 @@ Showing  with 0 additions and 183 deletions.
                  color: yellow;
         vertical-align:top;}
         .sevenSegmentTable {color:white; border-color:white;
-                            border:solid; border-collapse: collapse;}
+                            border:solid; border-collapse: collapse;
+     text-align: center;}
         .notsevenSegmentTable {border: none;}
         .horizontal           {width: 40px; height: 10px;}
         .vertical             {width: 10px; height: 40px:}
@@ -100,12 +101,12 @@ Showing  with 0 additions and 183 deletions.
             //"compute" the value of logical expression for each segment
             //our expression for A was ~wxz + w~x~y + ~x~y~z + ~wy
             var a = !w&x&z || w&!x&!y || !x&!y&!z || !w&y // the remainder of the expressions are left as an exercise
-            var b = false
-            var c = false
-            var d = false
-            var e = false
-            var f = false
-            var g = false
+            var b = !w&!x&!y ||!w&!x&y || !w&x&!y&!z || !w&x&y&z || w&!x&!y
+            var c = !w&!x&!y ||!w&!x&y&z || !w&x&!y || !w&x&y || w&!x&!y
+            var d = !x&!y&!z ||!w&y&!z || !w&!x&y&z ||!w&x&!y&z || w&!x&!y&z
+            var e = !w&!x&!z ||!w&x&y&!z || w&!x&!y&!z
+            var f = !w&!y&!z ||w&!x&!y || !w&x&!y&z || !w&x&y&!z
+            var g = !w&!x&y || !w&x&!y || !w&x&y&!z || w&!x&!y
             //assemble and return the output
             //we will build up the output string element by element
             var output = ''
@@ -123,33 +124,50 @@ Showing  with 0 additions and 183 deletions.
         }
         
     function illuminate(signals) {
-        document.getElementById("segments").innerHTML = signals
+        console.log('signals = ', signals)
+        //document.getElementById("segments").innerHTML = signals
         if (signals[0] == '1') {
-            document.getElementById("segmentA").innerHTML = 'ON'
+            document.getElementById("segmentA").innerHTML = ""
             document.getElementById("segmentA"),setAttribute("class","red")}
         else {document.getElementById("segmentA").innerHTML = ''
              document.getElementById("segmentA").setAttribute("class","black")}
         if (signals[1] == '1') {
-            document.getElementById("segmentB").innerHTML = 'ON'}
-            document.getElementById("segmentB").setAttribute("class", "red")
+            document.getElementById("segmentB").innerHTML = ""
+            document.getElementById("segmentB").setAttribute("class", "red")}
         else {document.getElementById("segmentB").innerHTML =''
              document.getElementById("segmentB")setAttribute("class", "black")}
         if (signals[2] == '1') {
-            document.getElementById("segmentC").innerHTML = 'ON'}
+            document.getElementById("segmentC").innerHTML = ""
+            document.getElementById("segmentC").setAttribute("class","red")}
+            else {document.getElementById("segmentC").innerHTML = ''
+                document.getElementById("segmentC").setAttribute("class","black")}
         if (signals[3] == '1') {
-            document.getElementById("segmentD").innerHTML = 'ON'}
+            document.getElementById("segmentD").innerHTML = ""
+            document.getElementById("segmentD").innerHTML = ""
+                document.getElementById("segmentD").setAttribute("class","red")}
+            else {document.getElementById("segmentD").innerHTML = ''
+                document.getElementById("segmentD").setAttribute("class","black")}
         if (signals[4] == '1') {
-            document.getElementById("segmentE").innerHTML = 'ON'}
+            document.getElementById("segmentE").innerHTML = ""
+            document.getElementById("segmentE").setAttribute("class","red")}
+            else {document.getElementById("segmentE").innerHTML = ''
+                document.getElementById("segmentE").setAttribute("class","black")}
         if (signals[5] == '1') {
-            document.getElementById("segmentF").innerHTML = 'ON'}
+            document.getElementById("segmentF").innerHTML = ""
+            document.getElementById("segmentF").setAttribute("class","red")}
+            else {document.getElementById("segmentF").innerHTML = ''
+                document.getElementById("segmentF").setAttribute("class","black")}
         if (signals[6] == '1') {
-            document.getElementById("segmentG").innerHTML = 'ON'}
+            document.getElementById("segmentG").innerHTML = ""
+            document.getElementById("segmentG").setAttribute("class","red")}
+            else {document.getElementById("segmentG").innerHTML = ''
+                document.getElementById("segmentG").setAttribute("class","black")}
         
     }
         </script>
     </head>
 <body>
-    <h2>Version 9 </h2>
+    <h2>Version 9 adding BIN2SSD Functionality</h2>
     <table class="standardTable">
         <tr>
             <td class="blackbox"><h3>Keypad</h3><button type="button" onclick="display(1)">1</button>
@@ -169,11 +187,12 @@ Showing  with 0 additions and 183 deletions.
             <p id="binary_output">???</p></td>
 
             <td class="blackbox"><h3>Binary to SSD Signals</h3>
-            <p id="bin2ssd_input">???</p>
-            <p id="bin2ssd_output">???</p>
+            <p id="bin2ssd_input"></p>
+            <p id="bin2ssd_output"></p>
             </td>
             <td class="blackbox"><h3>Illuminate Segments</h3>
-                <p id="segments"></p>
+                <p id="illuminate_input"></p>
+             <p id="illuminate_output"></p>
             <table>
 
                 <tr>
